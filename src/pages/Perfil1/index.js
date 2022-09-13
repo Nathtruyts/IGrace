@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-export default function Notificacao() {
+export default function Perfil() {
     return(
         <View style={styles.container}>
-            <Text style={styles.text}>Pagina de Notificacacões</Text>
+            <Text style={styles.text}>Pagina de Perfil</Text>
         </View>
     );
 }
