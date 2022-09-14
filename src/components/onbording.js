@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 
 export default Onbording = () => {
     return(
         <View style={styles.container}>
-            <Text>Onbording</Text>
+            <FlatList/>
         </View>
     );
 };
