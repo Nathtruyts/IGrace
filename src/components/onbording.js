@@ -1,12 +1,14 @@
 import React, { useState, useRef} from 'react';
 
-import { View, Text, StyleSheet, Animated, FlatList } from 'react-native';
+import { View, StyleSheet, Animated, FlatList } from 'react-native';
 
 import OnboardingItem from '../components/onbordingitem';
 
 import Paginator from '../components/paginator';
 
-import slides from '../slides';
+import NextButton from '../components/NextButton';
+
+import slides from '../components/slides';
 
 export default Onbording = () => {
 
@@ -21,6 +23,14 @@ export default Onbording = () => {
     }).current;
 
     const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
+ 
+    const scrollTo = () =>{
+        if (currentIndex < slides.length - 1) {
+            slidesRef.current.scrollToIndex({ index: currentIndex + 1});
+        } else {
+            console.log('Last item');
+        }
+    };
 
     return(
         <View style={styles.container}>
@@ -45,7 +55,8 @@ export default Onbording = () => {
                 />
             </View>
 
-            <Paginator data={slides} scrollX={scrollX}/>    
+            <Paginator data={slides} scrollX={scrollX}/>
+            <NextButton scrollTo={scrollTo} percentage={(currentIndex + 1) * (100 / slides.length)} />    
         </View>
     );
 };
@@ -53,7 +64,6 @@ export default Onbording = () => {
 const styles = StyleSheet.create({
     container:{
         flex: 3,
-
         justifyContent:'center',
         alignItems:'center',
 

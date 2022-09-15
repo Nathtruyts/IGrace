@@ -9,7 +9,7 @@ export default OnbordingItem = ({ item }) =>
     return(
         <View style={[styles.container, { width}]}>
             
-            <Image source={item.image} style={[styles.image, { width, resizeMode: 'conatin'}]}/>
+            <Image source={item.image} style={[styles.image, { width, resizeMode: 'contain'}]}/>
 
             <View style={{ flex: 0.3}}>
 

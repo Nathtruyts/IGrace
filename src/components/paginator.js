@@ -10,10 +10,10 @@ export default Paginator = ({ data, scrollX }) => {
             {data.map((_, i) => {
                 const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
 
-                const dotWidth = scrollX.interpole({
+                const dotWidth = scrollX.interpolate({
                     inputRange,
                     outputRange: [10, 20, 10],
-                    extrapole: 'clamp',
+                    extrapolate: 'clamp',
                 });
 
                 const opacity = scrollX.interpolate({
