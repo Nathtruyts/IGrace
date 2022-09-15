@@ -5,8 +5,9 @@ import { AntDesign } from '@expo/vector-icons';
 
 export default NextButton = ({ percentage, scrollTo }) => {
     
-    const size = 128;
+    const size = 115;
     const strokeWidth = 2;
+    const center = size / 2;
     const radius = size / 2 - strokeWidth / 2;
     const circumference = 2 * Math.PI * radius;
 
@@ -27,7 +28,7 @@ export default NextButton = ({ percentage, scrollTo }) => {
     }, [percentage]);
 
     useEffect(() => {
-        progressAnimation.addListner(
+        progressAnimation.addListener(
             (value) => {
             const strokeDashoffset = circumference - (circumference * value.value) / 100;
 
@@ -41,7 +42,7 @@ export default NextButton = ({ percentage, scrollTo }) => {
         );
 
         return () => {
-            progressAnimation.removeAllListeners()
+            progressAnimation.removeAllListeners();
         };
     }, []);    
 
@@ -62,6 +63,7 @@ export default NextButton = ({ percentage, scrollTo }) => {
                    r={radius}
                    strokeWidth={strokeWidth}
                    strokeDasharray={circumference}
+                   fill='white'
                    />
                 
                 </G>
@@ -85,7 +87,7 @@ const styles = StyleSheet.create({
     button: {
         position: 'absolute',
         backgroundColor: '#f4338f',
-        borderRadius: 100,
-        padding: 20,
+        borderRadius: 80,
+        padding: 25,
     },
 });

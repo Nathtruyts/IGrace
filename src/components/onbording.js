@@ -23,14 +23,7 @@ export default Onbording = () => {
     }).current;
 
     const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
- 
-    const scrollTo = () =>{
-        if (currentIndex < slides.length - 1) {
-            slidesRef.current.scrollToIndex({ index: currentIndex + 1});
-        } else {
-            console.log('Last item');
-        }
-    };
+
 
     return(
         <View style={styles.container}>
@@ -54,9 +47,8 @@ export default Onbording = () => {
 
                 />
             </View>
-
-            <Paginator data={slides} scrollX={scrollX}/>
-            <NextButton scrollTo={scrollTo} percentage={(currentIndex + 1) * (100 / slides.length)} />    
+            
+            <Paginator data={slides} scrollX={scrollX}/>   
         </View>
     );
 };
@@ -66,6 +58,7 @@ const styles = StyleSheet.create({
         flex: 3,
         justifyContent:'center',
         alignItems:'center',
+        paddingTop: 60,
 
     },
 });
