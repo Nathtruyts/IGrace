@@ -14,14 +14,14 @@ export default [
     },
     {
         id:'3',
-        title:'mantenha a comunidade sempre unida',
-        description: 'Todas as informações necessárias em um só lugar',
+        title:'Mantenha a comunidade sempre unida',
+        description: 'Todas as informações necessárias em um só lugar.',
         image: require('../assets/People.png'),
     },
     {
         id:'4',
         title:'Compartilhe o seu pedido de oração!',
-        description:'Distribua a graça sem sair de casa!',
+        description:'Distribua a graça sem sair de casa.',
         image: require('../assets/united.png'),
     },
 

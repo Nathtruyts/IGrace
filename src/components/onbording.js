@@ -2,11 +2,11 @@ import React, { useState, useRef} from 'react';
 
 import { View, StyleSheet, Animated, FlatList } from 'react-native';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import OnboardingItem from '../components/onbordingitem';
 
 import Paginator from '../components/paginator';
-
-import NextButton from '../components/NextButton';
 
 import slides from '../components/slides';
 

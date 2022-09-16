@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, TouchableOpacity, Animated} from 'react-native';
 import Svg, {G, Circle} from 'react-native-svg';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign } from 'react-native-vector-icons';
 
 export default NextButton = ({ percentage, scrollTo }) => {
     

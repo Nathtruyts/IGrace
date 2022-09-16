@@ -25,23 +25,25 @@ export default OnbordingItem = ({ item }) =>
 
 const styles = StyleSheet.create({
     container: {
-        flex: 0.6,
+        flex: 0.5,
         justifyContent: 'center',
         alignItems: 'center',
     },
 
     image:{
-        flex: 0.7,
+        flex: 0.5,
         justifyContent: 'center',
-        paddingVertical: 48,
+        paddingVertical: 15,
     },
 
     title: {
-        fontWeight: '600',
+        fontWeight: '400',
         color: '#62656b',
         textAlign: 'center',
         paddingHorizontal: 20,
-        paddingVertical: 20,
+        paddingVertical: 0.8,
+        fontSize: 28,
+        fontWidth: 'bold',
     },
 
     description: {
@@ -49,6 +51,7 @@ const styles = StyleSheet.create({
         color: '#62656b',
         textAlign: 'center',
         paddingHorizontal: 34,
-        paddingVertical: 30,
+        paddingVertical: 25,
+        fontSize: 18,
     },
 })

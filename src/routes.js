@@ -7,7 +7,7 @@ import Perfil from './pages/Perfil1';
 import Oracao from './pages/oracao';
 import Progamacao from './pages/Programacao';
 
-import {Entypo, FontAwesome5} from '@expo/vector-icons';
+import {Entypo, FontAwesome5} from 'react-native-vector-icons';
 
 import ButtonNew from './components/ButtomNew';
 
