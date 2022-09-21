@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ActivityIndicator } from 'react-native';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
 
-import Routes from './src/routes';
 import Onbording from './src/components/onbording';
-import HomeScreen from './src/components/HomeScreen';
+import Login from './src/components/HomeScreen';
 
 const Loading = () => {
+    <View>
+      <ActivityIndicator size="large" />
+   </View>  
+};
 
-const checkOnbording = async () => {
+export default App = () => {
+  const [loading, setLoading] = useState(true);
+  const [viewedOnbording, setViewedOnbording] = useState(false);
+
+  const checkOnbording = async () => {
     try {
       const value = await AsyncStorage.getItem('@viewedOnbording');
-
+  
       if (value !== null) {
           setViewedOnbording(true);
       }
@@ -21,27 +27,25 @@ const checkOnbording = async () => {
     } finally {
        setLoading(false);
     }
-};   
+  };   
 
-useEffect(() => {
+  useEffect(() => {
     checkOnbording();
-
-}, [])
-
-    return(
-      <View>
-        <ActivityIndicator size="large" />
-    </View>  
-  );
-};
-
-export default function App() {
-  const [Loading, setLoading] = useState(true);
-  const [viewedOnbording, setViewedOnbording] = useState(false);
+}, []);
 
   return (
     <View style={styles.container}>
-      {Loading ? <Loading /> : viewedOnbording ? <HomeScreen/> : <Onbording/> }
+      {loading ? <Loading/> : viewedOnbording ? <Login/> : <Onbording/> }
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+});

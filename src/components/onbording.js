@@ -4,6 +4,8 @@ import { View, StyleSheet, Animated, FlatList } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import NextButton from '../components/NextButton';
+
 import OnboardingItem from '../components/onbordingitem';
 
 import Paginator from '../components/paginator';
@@ -24,6 +26,19 @@ export default Onbording = () => {
 
     const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
+    const scrollTo = async () => {
+        if (currentIndex < slides.length - 1){
+            slidesRef.current.scrollToIndex({ index: currentIndex + 1});
+        
+        } else{
+            try{
+                await AsyncStorage.setItem('@viewedOnbording', 'true');
+            } catch (err) {
+                console.log('Error @setItem: ', err);
+
+            }
+        }
+    };
 
     return(
         <View style={styles.container}>
@@ -48,7 +63,8 @@ export default Onbording = () => {
                 />
             </View>
             
-            <Paginator data={slides} scrollX={scrollX}/>   
+            <Paginator data={slides} scrollX={scrollX}/>
+            <NextButton scrollTo={scrollTo} percentage={(currentIndex + 1) * (100 /slides.length)}/>   
         </View>
     );
 };

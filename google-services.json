@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "607049893542",
+    "project_id": "igrace-login",
+    "storage_bucket": "igrace-login.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607049893542:android:9f97d10792cb5184b31667",
+        "android_client_info": {
+          "package_name": "com.natenate.igrace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "607049893542-ncsupqo05de37e18d0ligroe6d2vu5u3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7AWnmx3mOWGVrmREo05XSa0zH6jvYlno"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "607049893542-ncsupqo05de37e18d0ligroe6d2vu5u3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
