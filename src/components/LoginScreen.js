@@ -1,7 +1,18 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Image, TextInput } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from "@react-navigation/native";
+
 
 export default function Login () {
+  const navigation = useNavigation();
+  const clearOnbording = async () => {
+    try{
+        await AsyncStorage.removeItem('@viewedOnbording');
+    } catch (err) {
+        console.log('Error @clearOnbording: ', err)
+    }
+}
     return(
         <KeyboardAvoidingView style={styles.background}>
             <View style={styles.containerLogo}>
@@ -24,14 +35,21 @@ export default function Login () {
             onChangeText={()=> {}}
             />
 
-            <TouchableOpacity style={styles.btnSubmit}>
+            <TouchableOpacity 
+             style={styles.btnSubmit}>
              <Text style={styles.submitText}>Acessar</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.btnCreate}>
             <Text style={styles.createText}>Criar conta gratuita</Text>
             </TouchableOpacity>
+            
+            <TouchableOpacity onPress={clearOnbording}>
+                <Text>Clear Onbording</Text>
+            </TouchableOpacity>
+           
            </View>
+        
         </KeyboardAvoidingView>
     );
 

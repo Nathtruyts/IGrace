@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
-
 import Onbording from './src/components/onbording';
-import Login from './src/components/HomeScreen';
+import Routes from './src/routes';
 
 const Loading = () => {
     <View>
@@ -35,7 +34,7 @@ export default App = () => {
 
   return (
     <View style={styles.container}>
-      {loading ? <Loading/> : viewedOnbording ? <Login/> : <Onbording/> }
+      {loading ? <Loading /> : viewedOnbording ? <Routes/> : <Onbording />}
     </View>
   );
 };

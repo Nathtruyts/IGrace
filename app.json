@@ -27,6 +27,9 @@
       },
       "package": "com.natenate.igrace"
     },
+    "packagerOpts": {
+      "nonPersistent": "--nonPersistent"
+    },
     "web": {
       "favicon": "./assets/favicon.png"
     },
