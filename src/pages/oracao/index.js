@@ -1,22 +1,55 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, {useEffect, useState} from 'react';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import Oracoes from './Orações';
+import Database from '../New/database';
 
-export default function Oracao() {
-    return(
-        <View style={styles.container}>
-            <Text style={styles.text}>Pagina de Orações</Text>
-        </View>
-    );
-}
+export default function Oracao({ route, navigation }){
 
-const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    text:{
-        fontSize: 25,
-        fontWeight:'bold'
+const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    Database.getItems().then(items => setItems(items));
+  }, [route]);
+
+  return(
+    <View style={styles.container}>
+      <Text style={styles.title}>Lista de pedidos</Text>
+      <ScrollView
+          style={styles.scrollContainer}
+          contentContainerStyle={styles.itemsContainer}>
+            { items.map(item => {
+              return <Oracoes key={item.id} id={item.id} item={item.pessoa + ' precisa de ' + item.descricao} navigation={navigation}/>
+            })}
+          </ScrollView>
+    </View>
+  )
     }
-});   
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#6495ED',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    title: {
+      color: '#fff',
+      fontSize: 20,
+      fontWeight: 'bold',
+      marginTop: 50,
+      marginBottom: 20
+    },
+    scrollContainer: {
+      flex: 1,
+      width: '90%'
+    },
+    itemsContainer: {
+      flex: 1,
+      marginTop: 10,
+      padding: 20,
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10,
+      alignItems: 'stretch',
+      backgroundColor: '#fff'
+    },
+  });

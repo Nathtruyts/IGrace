@@ -8,13 +8,9 @@ import Paginator from '../components/paginator';
 
 import slides from '../components/slides';
 
-import { useNavigation } from '@react-navigation/native';
-
 import Login from './LoginScreen';
 
 export default function Onbording(){
-
-    const navigation = useNavigation();
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const scrollX = useRef(new Animated.Value(0)).current;

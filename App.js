@@ -1,41 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
-import Onbording from './src/components/onbording';
+import React from 'react';
+import { StyleSheet, View} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import Routes from './src/routes';
 
-const Loading = () => {
-    <View>
-      <ActivityIndicator size="large" />
-   </View>  
-};
-
 export default App = () => {
-  const [loading, setLoading] = useState(true);
-  const [viewedOnbording, setViewedOnbording] = useState(false);
-
-  const checkOnbording = async () => {
-    try {
-      const value = await AsyncStorage.getItem('@viewedOnbording');
   
-      if (value !== null) {
-          setViewedOnbording(true);
-      }
-    } catch (err) {
-      console.log('Error @checkOnbording: ', err);
-    } finally {
-       setLoading(false);
-    }
-  };   
-
-  useEffect(() => {
-    checkOnbording();
-}, []);
-
   return (
-    <View style={styles.container}>
-      {loading ? <Loading /> : viewedOnbording ? <Routes/> : <Onbording />}
-    </View>
+    <NavigationContainer>
+       <Routes/>
+    </NavigationContainer>
   );
 };
 

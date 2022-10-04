@@ -1,11 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-import Login from './components/LoginScreen';
-
 import Home from './pages/Home';
 import New from './pages/New';
 import Perfil from './pages/Perfil1';
@@ -14,33 +9,10 @@ import Progamacao from './pages/Programacao';
 
 import {Entypo, FontAwesome5} from 'react-native-vector-icons';
 
-import ButtonNew from './components/ButtomNew';
-import Onbording from './components/onbording';
-
-
-
 const Tab = createBottomTabNavigator();
-
-const Stack = createNativeStackNavigator();
 
 export default function Routes(){
     return(
-    <NavigationContainer>
-        
-        <Stack.Navigator>
-         <Stack.Screen 
-         name="Inicio" 
-         component={Onbording}/>
-         
-         <Stack.Screen 
-         name="Login" 
-         component={Login} />
-         
-         <Stack.Screen 
-         name="Home" 
-         component={Home} />
-        </Stack.Navigator>
-        
         <Tab.Navigator
             screenOptions={{
                 tabBarStyle: {
@@ -53,7 +25,7 @@ export default function Routes(){
                     paddingTop: 5,
                 }
             }}
-        >
+>
                 <Tab.Screen
                     name="Home"
                     component={Home}
@@ -78,7 +50,7 @@ export default function Routes(){
                     options={{
                         tabBarLabel: "",
                         tabBarIcon: ({ size, color }) => (
-                            <ButtonNew size={size} color={color} />
+                            <Entypo name="circle-with-plus" size={size} color={color} />
                         )
                     }} />
 
@@ -99,8 +71,6 @@ export default function Routes(){
                             <Entypo name="user" size={size} color={color} />
                         )
                     }} />
-            </Tab.Navigator>
-
-           </NavigationContainer> 
-    )
-}
+        </Tab.Navigator>
+     )
+   }
