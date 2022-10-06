@@ -4,7 +4,6 @@ import Oracoes from './Orações';
 import Database from '../New/database';
 
 export default function Oracao({ route, navigation }){
-
 const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -18,9 +17,9 @@ const [items, setItems] = useState([]);
           style={styles.scrollContainer}
           contentContainerStyle={styles.itemsContainer}>
             { items.map(item => {
-              return <Oracoes key={item.id} id={item.id} item={item.pessoa + ' precisa de ' + item.descricao} navigation={navigation}/>
+              return <Oracoes key={item.id} id={item.id} item={item.pessoa + 'precisa de ' + item.descricao} navigation={navigation}/>
             })}
-          </ScrollView>
+      </ScrollView>
     </View>
   )
     }

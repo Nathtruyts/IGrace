@@ -1,25 +1,31 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import Database from './database';
- 
-export default function New({ navigation }) {
 
+import {Feather} from 'react-native-vector-icons';
+ 
+export default function New({ route, navigation }) {
+
+const id = route.params ? route.params.id : undefined;
 const [descricao, setDescricao] = useState(''); 
 const [pessoa, setPessoa] = useState('');
  
+useEffect(() => {
+  if(!route.params) return;
+  setDescricao(route.params.descricao);
+  setPessoa(route.params.pessoa);
+}, [route])
+
 function handleDescriptionChange(descricao){ setDescricao(descricao); } 
+
 function handlePersonChange(pessoa){ setPessoa(pessoa); }
-function handleButtonPress(){ 
-  console.log({id: new Date().getTime(), descricao, pessoa});
-  navigation.navigate("Oracao");
-}
 
 async function handleButtonPress(){ 
-  const listItem = {id: new Date().getTime(), descricao, pessoa};
-  Database.saveItem(listItem)
-      .then(response => NavigationPreloadManager.navigation("Oracao", listItem));
+  const listItem = {descricao, pessoa};
+  Database.saveItem(listItem, id)
+    .then(response => navigation.navigate("Oração", listItem));
 }
-  
+
   return (
 <View style={styles.container}>
   <Text style={styles.title}>Novo Pedido de Oração</Text>
@@ -28,14 +34,18 @@ async function handleButtonPress(){
       style={styles.input} 
       onChangeText={handleDescriptionChange} 
       placeholder="Qual o pedido?"
-      clearButtonMode="always" /> 
+      clearButtonMode="always"
+      value={descricao} /> 
     <TextInput 
       style={styles.input} 
       onChangeText={handlePersonChange} 
       placeholder="Para quem é destinada a oração?" 
-      clearButtonMode="always" /> 
-    <TouchableOpacity style={styles.button} onPress={handleButtonPress}> 
-    <Text style={styles.buttonText}>Salvar</Text> 
+      clearButtonMode="always"
+      value={pessoa} />
+    <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
+      <View style={styles.buttonContainer}>
+        <Feather name="save" size={22} color="white"/>
+      </View> 
     </TouchableOpacity>
   </View>
 </View>
@@ -85,9 +95,5 @@ const styles = StyleSheet.create({
       elevation: 20,
       shadowOpacity: 20,
       shadowColor: '#ccc',
-    },
-    buttonText: {
-      color: '#fff',
-      fontWeight: 'bold',
     }
   });
