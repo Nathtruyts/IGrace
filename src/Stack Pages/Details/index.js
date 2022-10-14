@@ -10,7 +10,7 @@ export default function Details({navigation, route}){
     const idTask = route.params.id
    
     function editTask(descricao, pessoa, id){
-      Database.collection("Devotions").doc(id).update({
+      Database.collection("devotions").doc(id).update({
         descricao: descricao,
         pessoa: pessoa,
       })
