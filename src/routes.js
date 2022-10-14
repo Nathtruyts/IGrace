@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+
 import Home from './pages/Home';
 import New from './pages/New';
 import Perfil from './pages/Perfil1';
@@ -24,12 +25,12 @@ export default function Routes(){
                     paddingBottom: 5,
                     paddingTop: 5,
                 }
-            }}
->
+            }}>
                 <Tab.Screen
                     name="Home"
                     component={Home}
                     options={{
+                        headerShown: false,
                         tabBarIcon: ({ size, color }) => (
                             <Entypo name="home" size={size} color={color} />
                         )
@@ -39,6 +40,7 @@ export default function Routes(){
                     name="Programação"
                     component={Progamacao}
                     options={{
+                        headerShown: false,
                         tabBarIcon: ({ size, color }) => (
                             <Entypo name="calendar" size={size} color={color} />
                         )
@@ -48,6 +50,7 @@ export default function Routes(){
                     name="Novo"
                     component={New}
                     options={{
+                        headerShown: false,
                         tabBarLabel: "",
                         tabBarIcon: ({ size, color }) => (
                             <Entypo name="circle-with-plus" size={size} color={color} />
@@ -55,7 +58,7 @@ export default function Routes(){
                     }} />
 
                 <Tab.Screen
-                    name="Oração"
+                    name="Orações"
                     component={Oracao}
                     options={{
                         tabBarIcon: ({ size, color }) => (
@@ -67,6 +70,7 @@ export default function Routes(){
                     name="Perfil"
                     component={Perfil}
                     options={{
+                        headerShown: false,
                         tabBarIcon: ({ size, color }) => (
                             <Entypo name="user" size={size} color={color} />
                         )

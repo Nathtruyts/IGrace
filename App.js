@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Routes from './src/routes';
 import Details from './src/Stack Pages/Details/index';
 
-const 
+
 
 export default App = () => {
   

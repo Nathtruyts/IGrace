@@ -1,54 +1,96 @@
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
-import Oracoes from './Orações';
-import Database from '../New/database';
+import { View, Text, FlatList, TouchableOpacity, Alert } from 'react-native';
+import Database from '../../config/firebase';
+import styles from './styles';
+
+import {Feather} from 'react-native-vector-icons'
 
 export default function Oracao({ route, navigation }){
 const [items, setItems] = useState([]);
 
+function editTask(descricao, pessoa, id){
+  Database.collection("devotions").doc(id).update({
+    descricao: descricao,
+    pessoa: pessoa,
+  })
+  navigation.navigate("Novo")
+}
+
+function deleteTask(id) {
+  Alert.alert(
+    "Atenção",
+    "Você tem certeza que deseja excluir este item?",
+    [
+        {
+            text: "Não",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+        },
+        {
+            text: "Sim", onPress: () => {
+              Database.collection("devotions").doc(id).delete();
+            }
+          }
+    ],        
+    { cancelable: false }
+  );
+}
+ 
+
   useEffect(() => {
-    Database.getItems().then(items => setItems(items));
-  }, [route]);
+    Database.collection("devotions").onSnapshot((query) =>{
+      const list = [];
+      query.forEach((doc)=>{
+        list.push({...doc.data(), id: doc.id });
+      });
+      setItems(list)
+    });
+  }, []);
+
 
   return(
     <View style={styles.container}>
-      <Text style={styles.title}>Lista de pedidos</Text>
-      <ScrollView
-          style={styles.scrollContainer}
-          contentContainerStyle={styles.itemsContainer}>
-            { items.map(item => {
-              return <Oracoes key={item.id} id={item.id} item={item.pessoa + 'precisa de ' + item.descricao} navigation={navigation}/>
-            })}
-      </ScrollView>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        data={items}
+        renderItem={( { item } )=>{
+      return(
+          <View style={styles.Tasks}>
+            <TouchableOpacity
+              style={styles.deleteTask}
+              onPress={() => {
+                deleteTask(item.id)
+              }}
+            >
+            <Feather
+              name="trash"
+              size={23}
+              color="#F92e6A"
+            >
+            </Feather>
+            </TouchableOpacity>
+            <Text
+              style={styles.DescriptionTask}
+              onPress={()=>
+                navigation.navigate("Details",{
+                  id: item.id,
+                  description: item.description,
+                })
+              }              
+            >
+            {item.pessoa + ' precisa de ' + item.descricao} 
+            </Text>  
+
+          </View>
+          )
+        }}
+      />
     </View>
   )
-    }
+}
+    
+    
+          
+        
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#6495ED',
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-    title: {
-      color: '#fff',
-      fontSize: 20,
-      fontWeight: 'bold',
-      marginTop: 50,
-      marginBottom: 20
-    },
-    scrollContainer: {
-      flex: 1,
-      width: '90%'
-    },
-    itemsContainer: {
-      flex: 1,
-      marginTop: 10,
-      padding: 20,
-      borderTopLeftRadius: 10,
-      borderTopRightRadius: 10,
-      alignItems: 'stretch',
-      backgroundColor: '#fff'
-    },
-  });
+  

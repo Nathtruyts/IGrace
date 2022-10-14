@@ -1,30 +1,30 @@
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import Database from './database';
+import { Text, View, TextInput, TouchableOpacity } from 'react-native';
+import Database from '../../config/firebase';
 
+import styles from './styles';
 import {Feather} from 'react-native-vector-icons';
  
 export default function New({ route, navigation }) {
 
-const id = route.params ? route.params.id : undefined;
-const [descricao, setDescricao] = useState(''); 
-const [pessoa, setPessoa] = useState('');
+const [descricao, setDescricao] = useState(null); 
+const [pessoa, setPessoa] = useState(null);
  
 useEffect(() => {
   if(!route.params) return;
-  setDescricao(route.params.descricao);
-  setPessoa(route.params.pessoa);
+  setDescricao(null);
+  setPessoa(null);
 }, [route])
 
-function handleDescriptionChange(descricao){ setDescricao(descricao); } 
 
-function handlePersonChange(pessoa){ setPessoa(pessoa); }
-
-async function handleButtonPress(){ 
-  const listItem = {descricao, pessoa};
-  Database.saveItem(listItem, id)
-    .then(response => navigation.navigate("Oração", listItem));
+function saveItem(){
+  Database.collection('devotions').add({
+    descricao: descricao,
+    pessoa: pessoa,
+  })
+  navigation.navigate("Orações");
 }
+
 
   return (
 <View style={styles.container}>
@@ -32,18 +32,22 @@ async function handleButtonPress(){
   <View style={styles.inputContainer}> 
     <TextInput 
       style={styles.input} 
-      onChangeText={handleDescriptionChange} 
+      onChangeText={setDescricao} 
       placeholder="Qual o pedido?"
       clearButtonMode="always"
       value={descricao} /> 
     <TextInput 
       style={styles.input} 
-      onChangeText={handlePersonChange} 
+      onChangeText={setPessoa} 
       placeholder="Para quem é destinada a oração?" 
       clearButtonMode="always"
       value={pessoa} />
-    <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
-      <View style={styles.buttonContainer}>
+    <TouchableOpacity 
+      style={styles.button} 
+      onPress={()=>{
+        saveItem()
+      }}>
+    <View style={styles.buttonContainer}>
         <Feather name="save" size={22} color="white"/>
       </View> 
     </TouchableOpacity>
@@ -51,49 +55,3 @@ async function handleButtonPress(){
 </View>
 );
   }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#6495ED',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-    title: {
-      color: '#fff',
-      fontSize: 20,
-      fontWeight: 'bold',
-      marginTop: 50,
-    },
-    inputContainer: {
-      flex: 1,
-      marginTop: 30,
-      width: '90%',
-      padding: 20,
-      borderTopLeftRadius: 10,
-      borderTopRightRadius: 10,
-      alignItems: 'stretch',
-      backgroundColor: '#fff'
-    },
-    input: {
-      marginTop: 10,
-      height: 60,
-      backgroundColor: '#fff',
-      borderRadius: 10,
-      paddingHorizontal: 24,
-      fontSize: 16,
-      alignItems: 'stretch'
-    },
-    button: {
-      marginTop: 10,
-      height: 60,
-      backgroundColor: 'blue',
-      borderRadius: 10,
-      paddingHorizontal: 24,
-      fontSize: 16,
-      alignItems: 'center',
-      justifyContent: 'center',
-      elevation: 20,
-      shadowOpacity: 20,
-      shadowColor: '#ccc',
-    }
-  });
