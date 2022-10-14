@@ -1,12 +1,11 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-
-import Home from './pages/Home';
-import New from './pages/New';
-import Perfil from './pages/Perfil1';
-import Oracao from './pages/oracao';
-import Progamacao from './pages/Programacao';
+import Home from '../pages/Home';
+import New from '../pages/New';
+import Perfil from '../pages/Perfil1';
+import Oracao from '../pages/oracao';
+import Progamacao from '../pages/Programacao';
 
 import {Entypo, FontAwesome5} from 'react-native-vector-icons';
 

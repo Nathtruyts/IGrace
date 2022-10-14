@@ -1,18 +1,14 @@
 
 import React from 'react';
-import { StyleSheet, View} from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack'
-import Routes from './src/routes';
-import Details from './src/Stack Pages/Details/index';
-
-
+import Navigation from './src/Navigation/index';
 
 export default App = () => {
   
   return (
     <NavigationContainer>
-      <Routes/>
+      <Navigation/>
     </NavigationContainer>
 );
 }

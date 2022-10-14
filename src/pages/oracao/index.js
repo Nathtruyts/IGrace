@@ -74,7 +74,8 @@ function deleteTask(id) {
               onPress={()=>
                 navigation.navigate("Details",{
                   id: item.id,
-                  description: item.description,
+                  descricao: item.descricao,
+                  pessoa: item.pessoa,
                 })
               }              
             >

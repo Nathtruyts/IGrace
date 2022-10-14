@@ -5,11 +5,11 @@ import Database from "../../config/firebase";
 import styles from "./styles";
 
 export default function Details({navigation, route}){
-    const [descricaoEdit, setDescriptionEdit] = useState(route.params.descricao)
-    const [pessoaEdit, setPessoaEdit]= useState(route.params.pessoa)
+    const [descricaoEdit, setdescricaoEdit] = useState(route.params.descricao)
+    const [pessoaEdit, setpessoaEdit]= useState(route.params.pessoa)
     const idTask = route.params.id
    
-    function editTask(descricao, pessoa,  id){
+    function editTask(descricao, pessoa, id){
       Database.collection("Devotions").doc(id).update({
         descricao: descricao,
         pessoa: pessoa,
@@ -23,20 +23,20 @@ export default function Details({navigation, route}){
           <TextInput
           style={styles.input}
           placeholder="Ex: Precisa de um emprego"
-          onChangeText={setDescriptionEdit}
+          onChangeText={setdescricaoEdit}
           value={descricaoEdit}
           />
           <Text style={styles.label}>Quem precisa da oração</Text>
           <TextInput
           style={styles.input}
           placeholder="Ex; Jorge da Silva"
-          onChangeText={setPessoaEdit}
+          onChangeText={setpessoaEdit}
           value={pessoaEdit}
           />
           <TouchableOpacity 
             style={styles.buttonNewTask}
             onPress={()=>{
-              editTask(descriptionEdit, idTask)
+              editTask(descricaoEdit, pessoaEdit, idTask)
             }}
           >
             <Text style={styles.iconButton}>Save</Text>
