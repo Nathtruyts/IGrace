@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import { View, Text, FlatList, TouchableOpacity, Alert } from 'react-native';
-import Database from '../../config/firebase';
+import firebase from '../../config/firebase';
 import styles from './styles';
 
 import {Feather} from 'react-native-vector-icons'
 
 export default function Oracao({ route, navigation }){
+const Database = firebase.firestore()  
 const [items, setItems] = useState([]);
 
 function editTask(descricao, pessoa, id){

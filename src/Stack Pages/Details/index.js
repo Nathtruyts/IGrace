@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import {View, Text, TextInput, TouchableOpacity}  from "react-native";
  
-import Database from "../../config/firebase";
+import firebase from "../../config/firebase";
 import styles from "./styles";
 
 export default function Details({navigation, route}){
+    const Database = firebase.firestore()
     const [descricaoEdit, setdescricaoEdit] = useState(route.params.descricao)
     const [pessoaEdit, setpessoaEdit]= useState(route.params.pessoa)
     const idTask = route.params.id

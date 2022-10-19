@@ -1,19 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import { Text, View, TextInput, TouchableOpacity } from 'react-native';
-import Database from '../../config/firebase';
+import firebase from '../../config/firebase';
 
 import styles from './styles';
 import {Feather} from 'react-native-vector-icons';
  
 export default function New({ route, navigation }) {
-
+const Database = firebase.firestore()
 const [descricao, setDescricao] = useState(null); 
 const [pessoa, setPessoa] = useState(null);
  
 useEffect(() => {
   if(!route.params) return;
-  setDescricao(null);
-  setPessoa(null);
+  setDescricao();
+  setPessoa();
 }, [route])
 
 
@@ -24,7 +24,6 @@ function saveItem(){
   })
   navigation.navigate("Orações");
 }
-
 
   return (
 <View style={styles.container}>
@@ -42,15 +41,29 @@ function saveItem(){
       placeholder="Para quem é destinada a oração?" 
       clearButtonMode="always"
       value={pessoa} />
+
+     { descricao ==="" || pessoa ===""
+     ?
+     <TouchableOpacity 
+      disabled={true}
+      style={styles.button}>
+    <View style={styles.buttonContainer}>
+        <Feather name="save" size={22} color="white"/>
+      </View> 
+    </TouchableOpacity>
+    :
     <TouchableOpacity 
       style={styles.button} 
       onPress={()=>{
+        setPessoa("")
+        setDescricao("")
         saveItem()
       }}>
     <View style={styles.buttonContainer}>
         <Feather name="save" size={22} color="white"/>
       </View> 
     </TouchableOpacity>
+    }   
   </View>
 </View>
 );
