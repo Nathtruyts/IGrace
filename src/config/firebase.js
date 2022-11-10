@@ -1,5 +1,7 @@
 import firebase from "firebase"
 import 'firebase/storage';
+import 'firebase/auth';
+
 
 var firebaseConfig = {
 
@@ -17,6 +19,9 @@ var firebaseConfig = {
   
   };
 
+
   firebase.initializeApp(firebaseConfig);
-  
+  var provider = new firebase.auth.GoogleAuthProvider();
+
+
   export default firebase

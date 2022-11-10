@@ -1,22 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, KeyboardAvoidingView, TextInput } from 'react-native';
-import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons} from "react-native-vector-icons"
+import firebase from '../../config/firebase';
+import { useNavigation } from "@react-navigation/native"; 
 import styles from './styles';
 
 export default function Login () {
-  const [email, setEmail] = useState('')
-  const [senha, setSenha] = useState('')
-  const [errorlogin, setErrorLogin] = useState('')
-  const navigation = useNavigation();
-  
-  const LoginFiebase = ()=>{
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorlogin, setErrorLogin] = useState('');
 
-  }
+  const navigation = useNavigation();
+
+  // const LoginFirebase = ()=>{
+  // firebase.auth().signInWithEmailAndPassword(email, password)
+  // .then((userCredential) => {
+  //   let user = userCredential.user;
+  //   console.log(user)
+  //   navigation.navigate("Main", { idUser: user.uid })
+  // })
+  // .catch((error) => {
+  //   setErrorLogin(true)
+  //   let errorCode = error.code;
+  //   let errorMessage = error.message;
+  // });
+  // }
 
   useEffect(()=>{
 
-  }, [email]);
+  }, []);
 
     return(
         <KeyboardAvoidingView style={styles.background}>
@@ -34,8 +46,8 @@ export default function Login () {
             secureTextEntry={true}
             placeholder="Senha"
             autoCorrect={false}
-            onChangeText={(text)=> setSenha(text)}
-            value={senha}
+            onChangeText={(text)=> setPassword(text)}
+            value={password}
             />
 
             {errorlogin === true 
@@ -51,30 +63,26 @@ export default function Login () {
             :
             <View/>  
             }
-             { email ==="" || senha === ""
+             { email ==="" || password === ""
              ?
              <TouchableOpacity
              disabled={true}
-             style={styles.btnSubmit}
-             onPress={()=>
-               navigation.navigate("Main")
-            }>
+             style={styles.btnSubmit}>
              <Text style={styles.submitText}>Acessar</Text>
           
             </TouchableOpacity>
              :
             <TouchableOpacity 
             style={styles.btnSubmit}
-             onPress={()=>
-               navigation.navigate("Main")
-            }>
-             <Text style={styles.submitText}>Acessar</Text>
+            onPress={() =>  navigation.navigate("Main")}>
+            <Text style={styles.submitText}>Acessar</Text>
           
             </TouchableOpacity>
              }
 
-            <TouchableOpacity style={styles.btnCreate}>
-            <Text style={styles.createText}>Criar conta gratuita</Text>
+            <TouchableOpacity style={styles.btnCreate}
+            onPress = { () =>  navigation.navigate("Register")}>
+            <Text style={styles.createText}>Criar conta gratuita</Text>  
             </TouchableOpacity>
                        
            </View>
